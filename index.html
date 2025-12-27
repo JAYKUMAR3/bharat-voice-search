@@ -1,1 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bharat Voice Search</title>
+<link rel="icon" href="image/bharat_logo.png">
 
+<style>
+body{font-family:Arial,sans-serif;margin:0;text-align:center;background:#fff}
+.header{margin-top:40px}
+.logo{width:70px}
+h1{margin:10px 0 0;font-size:24px}
+.tagline{color:#666;font-size:14px}
+.search-box{margin:30px auto;max-width:90%;width:500px;display:flex;align-items:center;border:1px solid #ddd;border-radius:50px;padding:10px 15px}
+.search-box input{flex:1;border:none;outline:none;font-size:16px}
+.search-box button{margin-left:8px;padding:8px 16px;border:none;border-radius:20px;background:#1a73e8;color:#fff}
+.mic{cursor:pointer;font-size:20px;margin-left:10px}
+.buttons{margin-top:15px}
+.buttons button{margin:5px;padding:8px 16px;border:none;border-radius:20px;background:#f1f3f4}
+#result{margin:20px auto;max-width:600px;text-align:left;font-size:15px}
+.footer{margin-top:40px;color:#666;font-size:13px}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+  <img src="image/bharat_logo.png" class="logo">
+  <h1>Bharat Voice Search</h1>
+  <div class="tagline">India ka apna Voice Help Engine</div>
+</div>
+
+<div class="search-box">
+  <input id="search" placeholder="Job, News, Cricket, Lottery...">
+  <button onclick="runSearch()">Search</button>
+  <span class="mic" onclick="startVoice()">🎤</span>
+</div>
+
+<div class="buttons">
+  <button onclick="quick('news')">News</button>
+  <button onclick="quick('cricket')">Cricket</button>
+  <button onclick="quick('football')">Football</button>
+  <button onclick="quick('job')">Jobs</button>
+  <button onclick="quick('lottery sambad')">Lottery</button>
+</div>
+
+<div id="result"></div>
+
+<div class="footer">
+  This app created by Jay Kumar Sarkar · <a href="privacy.html">Privacy Policy</a>
+</div>
+
+<script>
+const search=document.getElementById("search");
+const result=document.getElementById("result");
+
+function quick(t){search.value=t;runSearch()}
+function openSite(u){window.open(u,"_blank")}
+
+/* LANGUAGE DETECT */
+function detectLang(t){
+ if(/[অ-হ]/.test(t)) return "bn";
+ if(/[அ-ஹ]/.test(t)) return "ta";
+ if(/[అ-హ]/.test(t)) return "te";
+ if(/[अ-ह]/.test(t)) return "hi";
+ return "en";
+}
+
+/* MAIN SEARCH */
+function runSearch(){
+ let v=search.value.toLowerCase().trim();
+ let lang=detectLang(v);
+
+ /* NEWS */
+ if(v.includes("news")||v.includes("खबर")||v.includes("খবর")||v.includes("செய்தி")){
+   if(lang==="hi"){
+     openSite("https://news.google.com/search?q=हिंदी+समाचार&hl=hi&gl=IN");
+   }else if(lang==="bn"){
+     openSite("https://news.google.com/search?q=বাংলা+খবর&hl=bn&gl=IN");
+   }else if(lang==="ta"){
+     openSite("https://news.google.com/search?q=தமிழ்+செய்திகள்&hl=ta&gl=IN");
+   }else if(lang==="te"){
+     openSite("https://news.google.com/search?q=తెలుగు+వార్తలు&hl=te&gl=IN");
+   }else{
+     openSite("https://news.google.com");
+   }
+   return;
+ }
+
+ /* CRICKET */
+ if(v.includes("cricket")||v.includes("ipl")||v.includes("ক্রিকেট")){
+   openSite("https://www.google.com/search?q=cricket+news&tbm=nws");
+   return;
+ }
+
+ /* FOOTBALL */
+ if(v.includes("football")||v.includes("ফুটবল")){
+   openSite("https://www.google.com/search?q=football+news&tbm=nws");
+   return;
+ }
+
+ /* JOB */
+ if(v.includes("job")||v.includes("नौकरी")){
+   openSite("https://www.sarkariresult.com");
+   return;
+ }
+
+ /* LOTTERY */
+ if(v.includes("lottery")){
+   openSite("https://www.google.com/search?q=lottery+sambad+result");
+   return;
+ }
+
+ /* FALLBACK */
+ if(v){
+   openSite("https://www.google.com/search?q="+encodeURIComponent(v));
+ }
+}
+
+/* VOICE */
+function startVoice(){
+ if(!('webkitSpeechRecognition'in window)){
+   alert("Voice not supported");return;
+ }
+ let r=new webkitSpeechRecognition();
+ r.lang="hi-IN";
+ r.onresult=e=>{
+   search.value=e.results[0][0].transcript;
+   runSearch();
+ };
+ r.start();
+}
+</script>
+
+</body>
+</html>
