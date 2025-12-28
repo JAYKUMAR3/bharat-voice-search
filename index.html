@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Bharat Voice Search</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#1a73e8">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 20px;
+    }
+    img {
+      width: 80px;
+      margin-bottom: 10px;
+    }
+    input {
+      width: 80%;
+      padding: 12px;
+      font-size: 16px;
+    }
+    button {
+      padding: 12px 20px;
+      font-size: 16px;
+      margin: 5px;
+      background: #1a73e8;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+    .links button {
+      margin: 5px;
+    }
+    footer {
+      margin-top: 40px;
+      font-size: 14px;
+      color: gray;
+    }
+  </style>
+</head>
+
+<body>
+
+  <img src="bharat_logo.png" alt="Bharat Logo">
+
+  <h2>Bharat Voice Search</h2>
+  <p>India ka apna Voice Help Engine</p>
+
+  <input id="query" placeholder="Search here..." />
+  <br><br>
+
+  <button onclick="search()">Search</button>
+  <button onclick="voice()">🎤</button>
+
+  <div class="links">
+    <h3>Quick Apps</h3>
+
+    <button onclick="go('https://www.zomato.com')">Zomato</button>
+    <button onclick="go('https://www.swiggy.com')">Swiggy</button>
+    <button onclick="go('https://www.rapido.bike')">Rapido</button>
+    <button onclick="go('https://www.olacabs.com')">Ola</button>
+    <button onclick="go('https://www.irctc.co.in')">IRCTC</button>
+    <button onclick="go('https://weather.com')">Weather</button>
+    <button onclick="go('https://maps.google.com')">Google Maps</button>
+    <button onclick="go('https://paytm.com')">Paytm</button>
+    <button onclick="go('https://gpay.app.goo.gl')">GPay</button>
+    <button onclick="go('https://www.youtube.com')">YouTube</button>
+    <button onclick="go('https://www.instagram.com')">Instagram</button>
+  </div>
+
+  <footer>
+    This app created by Jay Kumar Sarkar |
+    <a href="#">Privacy Policy</a>
+  </footer>
+
+<script>
+  function search() {
+    const q = document.getElementById("query").value;
+    if(q) window.location.href = "https://www.google.com/search?q=" + encodeURIComponent(q);
+  }
+
+  function voice() {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+      alert("Voice not supported");
+      return;
+    }
+    const rec = new SpeechRecognition();
+    rec.lang = navigator.language || "en-IN";
+    rec.start();
+    rec.onresult = e => {
+      document.getElementById("query").value = e.results[0][0].transcript;
+      search();
+    };
+  }
+
+  function go(url) {
+    window.open(url, "_blank");
+  }
+
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('service-worker.js');
+  }
+</script>
+
+</body>
+</html>
