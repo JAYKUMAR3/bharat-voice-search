@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Bharat Lite</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="style.css">
+
+<!-- Cropper CSS -->
+<link rel="stylesheet"
+href="https://unpkg.com/cropperjs@1.6.2/dist/cropper.min.css">
+</head>
+
+<body>
+
+<!-- ================= TOP BAR ================= -->
+<div class="topbar">
+  <button onclick="openLogin()">Login</button>
+  <input id="searchBox" placeholder="Search">
+  <button>🔍</button>
+
+  <div class="logoBox">
+    <img src="logo.png" height="30">
+    <span>Bharat Lite</span>
+  </div>
+</div>
+
+<!-- ================= LOGIN POPUP ================= -->
+<div class="popup" id="loginPop">
+  <div class="box">
+    <span class="close" onclick="closeAll()">✕</span>
+    <h3>Login</h3>
+    <input id="luser" placeholder="Email or Phone">
+<input id="lpass" type="password" placeholder="Password">
+
+<button onclick="login()">Login</button>
+<p onclick="openSignup()">Create New Account</p>
+<p onclick="forgotPassword()">Forgot Password?</p>
+  </div>
+</div>
+
+<!-- ================= SIGNUP POPUP ================= -->
+<div class="popup" id="signupPop">
+  <div class="box">
+    <span class="close" onclick="closeAll()">✕</span>
+    <h3>Signup</h3>
+    <input id="fname" type="text" placeholder="First Name">
+
+<input id="mname" type="text" placeholder="Middle Name">
+
+<input id="lname" type="text" placeholder="Last Name">
+
+<input id="email" type="email" placeholder="Email">
+
+<input id="phone" type="tel" placeholder="Phone Number">
+
+<input id="spass" type="password" placeholder="Password">
+
+<input id="cpass" type="password" placeholder="Confirm Password">
+
+<button onclick="signup()">Submit</button>
+  </div>
+</div>
+
+<!-- ================= SHARE POPUP ================= -->
+<div class="popup" id="sharePop">
+  <div class="box">
+    <span class="close" onclick="closeShare()">✕</span>
+    <h3>Share</h3>
+    <button onclick="shareTo('Facebook')">Facebook</button>
+    <button onclick="shareTo('WhatsApp')">WhatsApp</button>
+    <button onclick="shareTo('Twitter')">Twitter</button>
+    <button onclick="shareTo('Instagram')">Instagram</button>
+  </div>
+</div>
+
+<!-- ================= HOME ================= -->
+<div id="home" class="page active">
+
+  <video id="mainVideo" controls width="100%"></video>
+
+  <h3 id="showTitle"></h3>
+  <p id="showDesc"></p>
+  <p id="showTags"></p>
+
+  <div class="actions">
+    <span id="profileName"></span>
+    <button id="subBtn" onclick="subscribe()">Subscribe</button>
+    <span id="subCount">0</span>
+  </div>
+
+  <div class="actions">
+    <button onclick="likeLong()">👍 <span id="longLike">0</span></button>
+    <button onclick="openShare()">🔗 Share</button>
+  </div>
+
+  <div class="commentBox">
+    <input id="longCommentInput" placeholder="Comment">
+    <button onclick="addLongComment()">Post</button>
+    <div id="longCommentList"></div>
+  </div>
+
+  <h3>Shorts</h3>
+  <div id="shortPreviewRow" class="shortRow"></div>
+
+</div>
+
+<!-- ================= SHORTS ================= -->
+<div id="shorts" class="page">
+
+  <video id="shortVideo" controls class="short"></video>
+
+  <button onclick="shortLike()">❤️ <span id="shortLikeCount">0</span></button>
+
+  <div class="commentBox">
+    <input id="shortCommentInput" placeholder="Comment">
+    <button onclick="addShortComment()">Post</button>
+    <div id="shortCommentList"></div>
+  </div>
+
+</div>
+
+<!-- ================= UPLOAD ================= -->
+<div id="upload" class="page">
+  <h3>Upload Video</h3>
+
+  <input type="file" id="videoFile">
+
+  <input id="vtitle" placeholder="Title">
+  <input id="vtags" placeholder="Tags">
+  <textarea id="vdesc" placeholder="Description"></textarea>
+
+  <select id="vtype">
+    <option value="">Select Type</option>
+    <option value="long">Long</option>
+    <option value="short">Short</option>
+  </select>
+
+  <button onclick="uploadVideo()">Upload</button>
+</div>
+
+<!-- ================= PROFILE ================= -->
+<div id="profile" class="page">
+
+  <h3>Profile</h3>
+  <p id="profileName"></p>
+  <button onclick="logout()">Logout</button>
+
+  <h4>Profile Photo</h4>
+
+  <input type="file" accept="image/*" onchange="selectPhoto(event)">
+
+  <div id="cropArea" style="display:none;max-width:300px;">
+    <img id="cropImage" style="width:100%">
+    <button onclick="saveCroppedPhoto()">Save Photo</button>
+  </div>
+
+  <img id="profilePhoto"
+       style="display:none;width:120px;border-radius:50%;margin-top:10px;">
+</div>
+
+<!-- ================= BOTTOM NAV ================= -->
+<div class="bottom">
+  <button onclick="show('home')">Home</button>
+  <button onclick="show('shorts')">Shorts</button>
+  <button onclick="show('upload')">Upload</button>
+  <button onclick="show('profile')">Profile</button>
+</div>
+
+<!-- ================= SCRIPTS ================= -->
+<script src="https://unpkg.com/cropperjs@1.6.2/dist/cropper.min.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>
