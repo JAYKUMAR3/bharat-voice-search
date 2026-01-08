@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Upload Video</title>
+</head>
+<body>
+
+<h2>Upload Video</h2>
+
+<input type="text" id="title" placeholder="Video title"><br><br>
+<input type="file" id="videoFile" accept="video/mp4"><br><br>
+
+<button onclick="uploadVideo()">Upload</button>
+<p id="status"></p>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="upload.js"></script>
+
+</body>
+</html>
