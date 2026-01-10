@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Bharat Lite</title>
+
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://unpkg.com/cropperjs@1.6.2/dist/cropper.min.css">
+
+</head>
+<body>
+
+<!-- ================= TOP BAR ================= -->
+<div class="topbar">
+  <button onclick="openLogin()">Login</button>
+  <input id="searchBox" placeholder="Search">
+  <button>🔍</button>
+
+  <div class="logoBox">
+    <img src="logo.png">
+    <span>Bharat Lite</span>
+  </div>
+</div>
+
+<!-- ================= LOGIN POPUP ================= -->
+<div class="popup" id="loginPop">
+  <div class="box">
+    <span class="close" onclick="closeAll()">✕</span>
+    <h3>Login</h3>
+    <input id="luser" placeholder="Email or Phone">
+    <input id="lpass" type="password" placeholder="Password">
+    <button onclick="login()">Login</button>
+    <p onclick="openSignup()">Create New Account</p>
+    <p onclick="forgotPassword()">Forgot Password?</p>
+  </div>
+</div>
+
+<!-- ================= SIGNUP POPUP ================= -->
+<div class="popup" id="signupPop">
+  <div class="box">
+    <span class="close" onclick="closeAll()">✕</span>
+    <h3>Signup</h3>
+
+    <input id="fname" placeholder="First Name">
+    <input id="mname" placeholder="Middle Name">
+    <input id="lname" placeholder="Last Name">
+
+    <select id="gender">
+      <option value="">Select Gender</option>
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+      <option value="other">Other</option>
+    </select>
+
+    <input id="email" type="email" placeholder="Email">
+    <input id="phone" type="tel" placeholder="Phone Number">
+    <input id="spass" type="password" placeholder="Password">
+    <input id="cpass" type="password" placeholder="Confirm Password">
+
+    <button onclick="signup()">Submit</button>
+  </div>
+</div>
+
+<!-- ================= SHARE POPUP ================= -->
+<div class="popup" id="sharePop">
+  <div class="box">
+    <span class="close" onclick="closeShare()">✕</span>
+    <h3>Share</h3>
+    <button onclick="shareTo('Facebook')">Facebook</button>
+    <button onclick="shareTo('WhatsApp')">WhatsApp</button>
+    <button onclick="shareTo('Twitter')">Twitter</button>
+    <button onclick="shareTo('Instagram')">Instagram</button>
+    <button onclick="copyLink()">📋 Copy Link</button>
+    <p>Shares: <span id="shareCount">0</span></p>
+  </div>
+</div>
+
+<p id="reviewMsg" style="display:none;color:red;">
+⚠️ This video is under review
+</p>
+
+<!-- ================= HOME ================= -->
+<div id="home" class="page active">
+
+  <video id="mainVideo" controls></video>
+
+  <h3 id="showTitle"></h3>
+  <p id="showDesc"></p>
+  <p id="showTags"></p>
+
+  <div class="actions">
+    <span class="profileName"></span>
+    <button id="subBtn" onclick="subscribe()">Subscribe</button>
+    <span id="subCount">0</span>
+  </div>
+
+  <div class="actions">
+    <button onclick="likeLong()">👍 <span id="longLike">0</span></button>
+    <button onclick="openShare()">🔗 Share</button>
+  </div>
+
+  <div class="actions">
+    <button onclick="setPublic()">🌍 Public</button>
+    <button onclick="setPrivate()">🔒 Private</button>
+    <button onclick="deleteVideo()">🗑 Delete</button>
+    <button onclick="openReport()">🚩 Report</button>
+  </div>
+
+  <div class="commentBox">
+    <input id="longCommentInput" placeholder="Comment">
+    <button onclick="addLongComment()">Post</button>
+    <div id="longCommentList"></div>
+  </div>
+
+  <h3>Shorts</h3>
+  <div id="shortsGrid" class="shorts-grid"></div>
+
+</div>
+
+<!-- ================= SHORTS ================= -->
+<div id="shorts" class="page">
+  <div class="shorts-grid"></div>
+  <button onclick="shortLike()">❤️ <span id="shortLikeCount">0</span></button>
+</div>
+
+<!-- ================= UPLOAD ================= -->
+<div id="upload" class="page">
+  <h3>Upload Video</h3>
+
+  <input type="file" id="videoFile">
+  <input id="vtitle" placeholder="Title">
+  <input id="vtags" placeholder="Tags">
+  <textarea id="vdesc" placeholder="Description"></textarea>
+
+  <select id="vtype">
+    <option value="">Select Type</option>
+    <option value="long">Long</option>
+    <option value="short">Short</option>
+  </select>
+
+  <select id="vprivacy">
+    <option value="public">🌍 Public</option>
+    <option value="private">🔒 Private</option>
+  </select>
+
+  <button onclick="uploadVideo()">Upload</button>
+</div>
+
+<!-- ================= PROFILE ================= -->
+<div id="profile" class="page">
+  <h3>Profile</h3>
+  <p class="profileName"></p>
+
+  <button onclick="logout()">Logout</button>
+
+  <h4>Profile Photo</h4>
+  <input type="file" accept="image/*" onchange="selectPhoto(event)">
+
+  <div id="cropArea" style="display:none;">
+    <img id="cropImage">
+    <button onclick="saveCroppedPhoto()">Save Photo</button>
+  </div>
+
+  <img id="profilePhoto" style="display:none;">
+</div>
+
+<!-- ================= BOTTOM NAV ================= -->
+<div class="bottom">
+  <button onclick="show('home')">Home</button>
+  <button onclick="show('shorts')">Shorts</button>
+  <button onclick="show('upload')">Upload</button>
+  <button onclick="show('profile')">Profile</button>
+</div>
+
+<!-- ================= SCRIPTS (VERY IMPORTANT ORDER) ================= -->
+<script src="https://unpkg.com/cropperjs@1.6.2/dist/cropper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>

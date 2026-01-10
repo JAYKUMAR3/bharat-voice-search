@@ -1,0 +1,194 @@
+body{margin:0;font-family:Arial;background:#f2f2f2}
+
+.topbar{
+display:flex;
+justify-content:space-between;
+background:#111;
+color:#fff;
+padding:10px;
+}
+.leftTop{display:flex;gap:5px}
+.logoBox{display:flex;align-items:center}
+.logoBox img{height:30px;margin-right:8px}
+
+.popup{
+display:none;
+position:fixed;
+top:0;left:0;
+width:100%;height:100%;
+background:rgba(0,0,0,.6);
+overflow:auto;
+z-index:999;
+}
+.box{
+background:#fff;
+max-width:360px;
+margin:60px auto;
+padding:20px;
+position:relative;
+}
+.box input,textarea,select,button{
+width:100%;
+margin:6px 0;
+padding:8px;
+}
+.close{
+position:absolute;
+top:5px;
+right:10px;
+cursor:pointer;
+}
+
+.page{display:none;padding:10px}
+.page.active{display:block}
+
+video, iframe {
+width: 100%;
+height: auto;
+}
+
+.actions{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+align-items:center;
+}
+
+#subBtn{background:red;color:#fff;border:none}
+
+.commentBox{
+margin-top:10px;
+}
+.commentBox input{
+width:70%;
+padding:6px;
+}
+.commentBox button{
+padding:6px;
+}
+.commentBox div{
+background:#fff;
+margin-top:5px;
+padding:5px;
+border-radius:4px;
+}
+
+.shortRow{
+display:flex;
+gap:10px;
+overflow-x:auto;
+}
+.shortRow video{
+width:120px;
+height:200px;
+object-fit:cover;
+border-radius:8px;
+}
+
+.shorts{height:100vh}
+.short{height:100vh;object-fit:cover}
+
+.shortActions{
+position:absolute;
+right:10px;
+bottom:140px;
+}
+.shortComment{
+position:absolute;
+bottom:20px;
+left:10px;
+width:80%;
+}
+
+.bottom{
+position:fixed;
+bottom:0;
+width:100%;
+background:#000;
+display:flex;
+justify-content:space-around;
+}
+.bottom button{
+background:none;
+color:#fff;
+border:none;
+padding:12px;
+}
+#searchBox {
+height: 24px;
+padding: 2px 6px;
+font-size: 8px;
+}
+.container {
+width: 100%;
+max-width: 1200px;
+}
+@media (max-width: 768px) {
+.subscribe-btn {
+width: 100%;
+font-size: 16px;
+}
+
+.navbar {
+flex-direction: column;
+}
+}
+body {
+padding-bottom: 60px;
+}
+.actions {
+display: flex;
+gap: 8px;
+justify-content: space-between;
+flex-wrap: wrap;
+}
+
+.actions button {
+flex: 1;
+padding: 8px;
+font-size: 10px;
+}
+.shorts-grid {
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+gap: 10px;
+padding: 10px;
+}
+
+.shorts-grid video {
+width: 100%;
+height: 220px;
+object-fit: cover;
+border-radius: 8px;
+background: black;
+}
+.home-shorts-grid {
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+gap: 8px;
+margin: 10px;
+}
+
+.short-item {
+position: relative;
+width: 100%;
+height: 220px;
+overflow: hidden;
+border-radius: 10px;
+background: #000;
+}
+
+.short-item video {
+width: 100%;
+height: 100%;
+object-fit: cover;
+}
+/* Bottom nav always on top */
+.bottom {
+position: fixed;
+bottom: 0;
+left: 0;
+width: 100%;
+z-index: 9999;
+}
+
